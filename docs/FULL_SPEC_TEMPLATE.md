@@ -1,16 +1,16 @@
 # Full Spec: CampusConnect UNT
 
-**Team:** Emmanuel Dickson, Aeshwa Kachhadiya, Kavya Balaji Singh, Darshil Amit Soni, Jacob Tandoh  **Date:** Nov 19, 2026  **Committer:** Emmanuel Dickson
+**Team:** Emmanuel Dickson, Aeshwa Kachhadiya, Kavya Balaji Singh, Darshil Amit Soni, Jacob Tandoh  **Date:** Nov 19, 2026  **Committer:** Kavya Balaji Singh
 
 **Roles:** Product Owner Emmanuel Dickson | Process lead Aeshwa Kachhadiya | Architect Jacob Tandoh | Quality lead Kavya Balaji Singh | Prompt engineer Darshil Amit Soni
 
 ---
 
 ## 0. The idea (Chapter 1)
-- **Main problem, and for whom:** UNT students have no single, simple place to discover and register for Registered Student Organization (RSO) events, and RSO leaders have no simple way to publish events, manage sign-ups, and record who actually attended.
+- **Main problem, and for whom:** UNT students need one place to find and register for Registered Student Organization (RSO) events. RSO leaders need a simple way to publish events, manage sign-ups, and track attendance.
 - **Who is harmed if this app fails, is wrong, or leaks data?**
-  - Students: their names, emails, and event participation could be exposed. A silently lost registration means they show up to an event they think they have a spot in.
-  - RSO leaders: wrong capacity or attendance numbers mislead their planning and reporting.
+  - Students: their names, emails, and event participation could be exposed. If a registration is lost without notice, a student may show up expecting a spot.
+  - RSO leaders: Inaccurate capacity or attendance counts can affect event planning and reporting.
   - Other organizations: a leader who can see another RSO's attendance would be a privacy breach.
 - **The app must never:**
   - Store plain-text passwords.
@@ -46,7 +46,7 @@
 
 | Stakeholder | Wants |
 |---|---|
-| UNT students | Find events fast on a phone or computer, register in a few steps, cancel easily, trust that their spot is real |
+| UNT students | Quickly find events on a phone or computer, register in a few steps, cancel easily, and know their spot is confirmed |
 | RSO leaders | Publish events, know who registered, record attendance, see accurate totals |
 | Course instructor / graders | A traceable spec, justified decisions, tests that can fail, safe handling of data |
 | UNT / RSO advisors (indirect) | Student privacy protected; no impersonation of an official system |
@@ -307,7 +307,7 @@ Rules in the data model:
 3. Student registers, cancels, and a second student registers for the freed spot -> the second registration succeeds and the registered count stays at the capacity or below.
 
 - **Edge cases we will try to break each Must-do with:** capacity 0, negative, or huge (1,000,000); empty title or description; past dates; very long text; duplicate emails with different capitalization; empty search; registering for a cancelled or already-started event; marking attendance for a student who cancelled; two leaders editing attendance at once; SQL-like text in search fields.
-- **User testing:** 3 to 5 classmates outside the team (at least one on a phone, one using keyboard only). We want to learn whether they can find, register for, and cancel an event without help, and whether the forms and error messages are clear. Planned for sprint 3 (Dec 3 to Dec 9).
+- **User testing:** 3 to 5 classmates outside the team (at least one on a phone, one using keyboard only). We want to see whether they can find an event, register, and cancel their registration without help. We will also check whether the forms and error messages are clear. Planned for sprint 3 (Dec 3 to Dec 9).
 - **Deliberately not testing:** visual styling details; performance beyond the R10 check; real UNT data or login; load with many real concurrent users (SQLite single-machine demo scope).
 - **Test command:** `uv run pytest`
 - **AI contribution:** AI drafted the test list and "how it can fail" checks. The team reviewed it and made no changes.
